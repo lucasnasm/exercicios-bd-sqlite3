@@ -46,7 +46,7 @@ def menuVendas():
 
   op_vendas= int(input("Informe uma opção para iniciar: \n"))
   if (op_vendas==1):
-    listar("T_C")
+    listar("T_V")
   elif(op_vendas==2):
     vendas()
   elif(op_vendas==0):
@@ -169,6 +169,16 @@ def listar(seletor_menu):
       print("ID: ",registro[0])
       print("Nome: ",registro[1])
       print("Telefone: ",registro[2])
+      print("-------------")
+    cursor.close()
+  elif (seletor_menu == "T_V"):
+    sql_cliente = "SELECT nome,descricao FROM cliente,produto,venda WHERE cliente.id=venda.id_cliente AND produto.id=venda.id_produto"
+    cursor.execute(sql_cliente)
+    lista = cursor.fetchall()
+    for registro in lista:
+      print("-------------")
+      print("Nome: ",registro[0])
+      print("Produto Comprado: ",registro[1])
       print("-------------")
     cursor.close()
   else:
